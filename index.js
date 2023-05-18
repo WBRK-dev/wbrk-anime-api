@@ -1,5 +1,6 @@
 import "dotenv/config";
-import { readFileSync, writeFileSync} from "fs";;
+import { readFileSync, writeFileSync} from "fs";
+import crypto from "crypto";
 
 import express from 'express';
 
