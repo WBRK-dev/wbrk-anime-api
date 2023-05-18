@@ -29,7 +29,7 @@ app.get('/accesstoken/authorize', async (req, res) => {
 	if (json.access_token !== null && json.access_token !== undefined) {
 		let userid = crypto.randomUUID();
 
-		return res.send({"succesfull": true, "userid": userid});
+		return res.send({"succesfull": true, "userid": userid, "accesstoken": json.access_token});
 	} else {
 		return res.send({"succesfull": false});
 	}
