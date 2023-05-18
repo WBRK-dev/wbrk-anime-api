@@ -1,4 +1,5 @@
 import "dotenv/config";
+import "http";
 
 import express from 'express';
 
@@ -26,19 +27,14 @@ app.get('/accesstoken/authorize', async (req, res) => {
 
 	let json = await response.json();
 
-    return res.send(json);
+    return res.send({"status": 200});
 });
 
-app.get('/accesstoken/refresh', async (req, res) => {
-    let code = req.query.code;
+app.get('/json/write', async (req, res) => {
+    let user = req.query.code;
+    let passw = req.query.code;
 
-	let response = await fetch(url, {
-		headers: {
-		  'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-		},
-		method: 'POST',
-		body,
-	});
+	
 
     return res.send({"status": 200});
 });
