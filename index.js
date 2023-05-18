@@ -11,6 +11,8 @@ let CODE_VERIFIER = "this-is-bs-and-i-hate-this-part-so-just-make-something-real
 app.get('/accesstoken/authorize', async (req, res) => {
     let code = req.query.code;
 
+	res.setHeader('Access-Control-Allow-Origin', '*');
+
 	console.log(`AUTH - ${code}`);
 
 	let url = MAL_ACCESSTOKEN_URL;
@@ -33,6 +35,8 @@ app.get('/accesstoken/authorize', async (req, res) => {
 app.get('/json/write', async (req, res) => {
     let user = req.query.code;
     let passw = req.query.code;
+
+	res.setHeader('Access-Control-Allow-Origin', '*');
 
 	
 
