@@ -1,8 +1,10 @@
 import "dotenv/config";
-import { readFileSync, writeFileSync} from "fs";
 import crypto from "crypto";
-
 import express from 'express';
+
+// import CyclicDb from "@cyclic.sh/dynamodb";
+// const db = CyclicDb("fair-red-agouti-robeCyclicDB")
+// const users = db.collection("users");
 
 const app = express();
 
@@ -32,40 +34,11 @@ app.get('/accesstoken/authorize', async (req, res) => {
 
 	if (json.access_token !== null && json.access_token !== undefined) {
 		let userid = crypto.randomUUID();
-		let users = JSON.parse(readFileSync("database.json"));
-
-		users.push({id: userid, access_token: json.access_token, refresh_token: json.refresh_token});
-
-		writeFileSync("database.json", JSON.stringify(users));
 
 		return res.send({"succesfull": true, "userid": userid});
 	} else {
 		return res.send({"succesfull": false});
 	}
-});
-
-app.get('/json/write', async (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	
-    let user = req.query.user;
-    let passw = req.query.pass;
-
-	let users = JSON.parse(readFileSync("database.json"));
-
-	users.push({
-		name: user,
-		passw: passw
-	})
-	
-
-    return res.send({"status": 200, "users": users});
-});
-
-app.get('/getdatabase', async (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	let users = JSON.parse(readFileSync("database.json"));
-
-    return res.send({"status": 200, "users": users});
 });
 
 app.listen(8088, () =>
