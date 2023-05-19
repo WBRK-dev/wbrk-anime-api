@@ -37,7 +37,7 @@ app.get('/authorize', async (req, res) => {
 
 		await tokens.set("tokenjson", {tokenlist: tokenJson});
 
-		res.cookie("sessionid", sessionid, {httpOnly: true});
+		res.cookie("sessionid", sessionid, {httpOnly: true, domain: "wbrk-anime.pages.dev"});
 
 		return res.send({"succesfull": true});
 	} else {
