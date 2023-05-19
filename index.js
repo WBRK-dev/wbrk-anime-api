@@ -37,7 +37,7 @@ app.get('/authorize', async (req, res) => {
 
 		await tokens.set("tokenjson", {tokenlist: tokenJson});
 
-		res.cookie("sessionid", sessionid, {maxAge: 25922592});
+		res.cookie("sessionid", sessionid, {maxAge: 900000, httpOnly: true});
 
 		return res.send({"succesfull": true});
 	} else {
