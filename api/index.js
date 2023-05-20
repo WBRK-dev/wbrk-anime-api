@@ -8,7 +8,7 @@ app.get('/api/authorize', async (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
 	
     let code = req.query.code;
-	let ip =  req.socket.remoteAddress || req.headers['x-forwarded-for'];
+	let ip =  req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
 	console.log(`AUTH - ${ip}`);
 
@@ -25,7 +25,7 @@ app.get('/api/authorize', async (req, res) => {
 
 		return res.send({"succesfull": true});
 	} else {
-		return res.send({"succesfull": false, id: crypto.randomUUID()});
+		return res.send({"succesfull": false, failedFetch: json});
 	}
 });
 
