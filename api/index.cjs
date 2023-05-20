@@ -1,5 +1,5 @@
 import "dotenv/config";
-// import crypto from "crypto";
+import crypto from "crypto";
 import express from 'express';
 
 // import CyclicDb from "@cyclic.sh/dynamodb";
