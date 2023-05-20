@@ -1,6 +1,6 @@
-const process = require("dotenv")
+import "dotenv/config";
 // import crypto from "crypto";
-const express = require("express");
+import express from 'express';
 
 // import CyclicDb from "@cyclic.sh/dynamodb";
 // const db = CyclicDb("fair-red-agouti-robeCyclicDB")
