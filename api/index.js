@@ -2,6 +2,7 @@ const app = require('express')();
 const crypto = require("crypto");
 
 let MAL_ACCESSTOKEN_URL = "https://myanimelist.net/v1/oauth2/token";
+
 let CODE_VERIFIER = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
 
 app.get('/api/authorize', async (req, res) => {
