@@ -1,6 +1,6 @@
 const app = require('express')();
 
-app.get('/authorize', (req, res) => {
+app.get('/api/authorize', (req, res) => {
 	res.send({"yes": true})
 });
 
