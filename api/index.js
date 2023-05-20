@@ -20,13 +20,6 @@ app.get('/api/authorize', async (req, res) => {
 
 	if (json.access_token !== null && json.access_token !== undefined) {
 		let sessionid = crypto.randomUUID();
-		tokenJson.push({
-			sessionid: sessionid,
-			access: json.access_token,
-			refresh: json.refresh_token
-		});
-
-		await tokens.set("tokenjson", {tokenlist: tokenJson});
 
 		res.cookie("sessionid", sessionid, {httpOnly: true});
 
