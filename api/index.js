@@ -1,10 +1,10 @@
 import "dotenv/config";
-import crypto from "crypto";
+// import crypto from "crypto";
 import express from 'express';
 
-import CyclicDb from "@cyclic.sh/dynamodb";
-const db = CyclicDb("fair-red-agouti-robeCyclicDB")
-const tokens = db.collection("users");
+// import CyclicDb from "@cyclic.sh/dynamodb";
+// const db = CyclicDb("fair-red-agouti-robeCyclicDB")
+// const tokens = db.collection("users");
 
 const app = express();
 
@@ -37,7 +37,7 @@ app.get('/authorize', async (req, res) => {
 
 		await tokens.set("tokenjson", {tokenlist: tokenJson});
 
-		res.cookie("sessionid", sessionid, {httpOnly: true, domain: "wbrk-anime.pages.dev"});
+		res.cookie("sessionid", sessionid, {httpOnly: true});
 
 		return res.send({"succesfull": true});
 	} else {
@@ -57,3 +57,5 @@ app.get('/gettokenlist', async (req, res) => {
 app.listen(8088, () =>
     console.log(`Anime API listening on port 8088!`),
 );
+
+module.exports = app;
