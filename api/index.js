@@ -10,8 +10,8 @@ let tokens = [];
 
 global.tokens = tokens;
 
-app.get('/api/authorize', require("auth/authorize"));
-app.get('/api/list/get', require("list/get"));
+app.get('/api/authorize', require("./auth/authorize"));
+app.get('/api/list/get', require("./list/get"));
 
 
 
