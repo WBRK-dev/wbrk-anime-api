@@ -1,5 +1,8 @@
 const app = require('express')();
 const crypto = require("crypto");
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
 
 let MAL_ACCESSTOKEN_URL = "https://myanimelist.net/v1/oauth2/token";
 let CODE_VERIFIER = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
@@ -49,7 +52,7 @@ app.get('/api/list/get', async (req, res) => {
 
 	for (let i = 0; i < tokens.length; i++) {if (tokens[i].sessionid === sessionid) {accesstoken = tokens[i].access;break;}}
 
-	let response = await fetch("", {
+	let response = await fetch("https://api.myanimelist.net/v2/users/@me/animelist?fields=list_status&limit=16", {
 		headers: {
 			"Authorization": `Bearer ${accesstoken}`
 		}
