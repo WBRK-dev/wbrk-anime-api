@@ -14,6 +14,7 @@ global.CODE_VERIFIER = CODE_VERIFIER;
 
 app.get('/api/authorize', require("./auth/authorize"));
 app.get('/api/list/get', require("./list/get"));
+app.get('/api/user/info', require("./user/info"));
 
 
 
