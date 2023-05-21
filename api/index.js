@@ -21,7 +21,7 @@ app.get('/api/authorize', async (req, res) => {
 	if (json.access_token !== null && json.access_token !== undefined) {
 		let sessionid = crypto.randomUUID();
 
-		res.cookie("sessionid", sessionid, {httpOnly: true, secure: true, domain: "wbrk-anime.pages.dev"});
+		res.cookie("sessionid", sessionid, {httpOnly: true, secure: true, sameSite: "none"});
 
 		return res.send({"succesfull": true});
 	} else {
