@@ -6,6 +6,7 @@ let CODE_VERIFIER = "this-is-bs-and-i-hate-this-part-so-just-make-something-real
 
 app.get('/api/authorize', async (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
+	res.setHeader('Access-Control-Allow-Credentials', true);
 	
     let code = req.query.code;
 	let ip =  req.headers['x-forwarded-for'] || req.socket.remoteAddress;
