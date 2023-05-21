@@ -77,6 +77,11 @@ app.get('/api/test/list/get', async (req, res) => {
 	res.send(await response.json());
 })
 
+app.get('/api/test', async (req, res) => {
+	res.setHeader('Access-Control-Allow-Origin', 'wbrk-anime.pages.dev');
+	res.send({success: true});
+})
+
 
 
 
