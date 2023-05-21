@@ -65,6 +65,7 @@ app.get('/api/list/get', async (req, res) => {
 
 
 app.get('/api/test/list/get', async (req, res) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
 	let access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImUwZmMxYTY5Y2ZlNjkwNTBiYTVmZWQ3YmFhNTIyNzMzZTdmYmE3OGQ0ZjczYjg3YWQxOGJjNzY3MzViYjZhOTcwNGIyZjcyMTVjN2NkNWZmIn0.eyJhdWQiOiJmYjU2MTNkZjBmMzk1MjRhMjk1YjBkMWQ3YTYyMTNjYSIsImp0aSI6ImUwZmMxYTY5Y2ZlNjkwNTBiYTVmZWQ3YmFhNTIyNzMzZTdmYmE3OGQ0ZjczYjg3YWQxOGJjNzY3MzViYjZhOTcwNGIyZjcyMTVjN2NkNWZmIiwiaWF0IjoxNjg0Njc4NTIxLCJuYmYiOjE2ODQ2Nzg1MjEsImV4cCI6MTY4NzM1NjkyMSwic3ViIjoiMTQ1ODM3NzgiLCJzY29wZXMiOltdfQ.jJWkn4nosdx1KaRG4zV3UrqZaiyRhW5BUfXVT-_KV4CBjDwdc6A4G7TKr-ZdZTtUC8XDriR7U81P1yrLwxSQmmQyTWNBUyNIXBtq_p-bBy7Q5rrQ5vWABBw7Tmkb0tsPvR0NVuO2V_blNvjD7I00_EVccptgh80fzW9K5wc_MTdp52PSS6fnOd_LucEIY1LQvI4FTl7Tdb-CUQirn8mDS15jBC-1FxM3fYBJYv8K_qYxY03fkQ-xWrsALWv6taBRuI1gmoJQJvIa2WVnDxDlxmFSObVUho9pyPxuP5p4HgJCY1em2qHH50n0T79ZNGbytgaaRAs2QJb_ok0HRd4PUQ";
 
 	let response = await fetch("https://api.myanimelist.net/v2/users/@me/animelist?fields=list_status&limit=16", {
