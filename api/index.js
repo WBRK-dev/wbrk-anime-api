@@ -9,6 +9,8 @@ let CODE_VERIFIER = "this-is-bs-and-i-hate-this-part-so-just-make-something-real
 let tokens = [];
 
 global.tokens = tokens;
+global.MAL_ACCESSTOKEN_URL = MAL_ACCESSTOKEN_URL;
+global.CODE_VERIFIER = CODE_VERIFIER;
 
 app.get('/api/authorize', require("./auth/authorize"));
 app.get('/api/list/get', require("./list/get"));
