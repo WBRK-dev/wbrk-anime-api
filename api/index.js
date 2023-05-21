@@ -45,7 +45,8 @@ function refreshToken() {
 }
 
 app.get('/api/list/get', async (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
+	// res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
+	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Credentials', true);
 	let sessionid = req.cookies.sessionid;
 	let accesstoken = "";
