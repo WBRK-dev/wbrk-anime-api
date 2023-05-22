@@ -1,14 +1,13 @@
 const app = require('express')();
 const crypto = require("crypto");
 const cookieParser = require("cookie-parser");
+const tokens = require("./vars");
 
 app.use(cookieParser());
 
 let MAL_ACCESSTOKEN_URL = "https://myanimelist.net/v1/oauth2/token";
 let CODE_VERIFIER = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
-let tokens = [];
 
-global.tokens = tokens;
 global.MAL_ACCESSTOKEN_URL = MAL_ACCESSTOKEN_URL;
 global.CODE_VERIFIER = CODE_VERIFIER;
 
@@ -37,10 +36,10 @@ app.get('/api/test', async (req, res) => {
 	res.send({success: true});
 })
 
-app.get('/api/gettokens', (req, res) => {
+app.get('/api/test/gettokens', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Credentials', true);
-	res.send({tokens: tokens, global: global.tokens});
+	res.send(tokens.get());
 });
 
 // app.listen(8088, () =>

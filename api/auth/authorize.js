@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+const tokens = require("../vars");
 
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
