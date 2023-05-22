@@ -8,12 +8,20 @@ app.use(cookieParser());
 let MAL_ACCESSTOKEN_URL = "https://myanimelist.net/v1/oauth2/token";
 let CODE_VERIFIER = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
 
-global.MAL_ACCESSTOKEN_URL = MAL_ACCESSTOKEN_URL;
-global.CODE_VERIFIER = CODE_VERIFIER;
+function getTokens(req, res, next) {
+	let sessionid = req.cookies.sessionid;
+	let tempTokens = tokens.get();
+	let accesstoken = "";
+	
+	for (let i = 0; i < tempTokens.length; i++) {if (tempTokens[i].sessionid === sessionid) {accesstoken = tempTokens[i].access;break;}}
 
-app.get('/api/authorize', require("./auth/authorize"));
-app.get('/api/list/get', require("./list/get"));
-app.get('/api/user/info', require("./user/info"));
+	req.accesstoken = accesstoken;
+	next();
+}
+
+app.get('/api/authorize', getTokens, require("./auth/authorize"));
+app.get('/api/list/get', getTokens, require("./list/get"));
+app.get('/api/user/info', getTokens, require("./user/info"));
 
 
 
