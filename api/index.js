@@ -3,28 +3,19 @@ const cookieParser = require("cookie-parser");
 const tokens = require("./vars");
 
 app.use(cookieParser());
+app.use((req, res, next) => {
+	req.tokens = require("./vars");
+	next();
+})
 
 let MAL_ACCESSTOKEN_URL = "https://myanimelist.net/v1/oauth2/token";
 let CODE_VERIFIER = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
 global.MAL_ACCESSTOKEN_URL = MAL_ACCESSTOKEN_URL;
 global.CODE_VERIFIER = CODE_VERIFIER;
-global.tokens = tokens;
-
-function getTokens(req, res, next) {
-	let sessionid = req.cookies.sessionid;
-	req.accesstoken = tokens.find(sessionid).accesstoken;
-	console.log(req.accesstoken);
-	next();
-}
-
-function asignTokenObj(req, res, next) {
-	req.tokens = tokens;
-	next();
-}
 
 app.get('/api/authorize', require("./auth/authorize"));
-app.get('/api/list/get', getTokens, require("./list/get"));
-app.get('/api/user/info', getTokens, require("./user/info"));
+app.get('/api/list/get', require("./list/get"));
+app.get('/api/user/info', require("./user/info"));
 
 
 
@@ -53,8 +44,8 @@ app.get('/api/test/gettokens', getTokens, (req, res) => {
 	res.send({tokens_get: tokens.get(), tokensreq: req.accesstoken});
 });
 
-app.listen(8088, () =>
-    console.log(`Anime API listening on port 8088!`),
-);
+// app.listen(8088, () =>
+//     console.log(`Anime API listening on port 8088!`),
+// );
 
 module.exports = app;
