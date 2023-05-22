@@ -40,7 +40,7 @@ app.get('/api/test', async (req, res) => {
 app.get('/api/gettokens', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Credentials', true);
-	res.send(tokens);
+	res.send({tokens: tokens, global: global.tokens});
 });
 
 // app.listen(8088, () =>
