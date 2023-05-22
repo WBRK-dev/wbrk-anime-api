@@ -40,7 +40,7 @@ app.get('/api/test', async (req, res) => {
 	res.send({success: true});
 })
 
-app.get('/api/test/gettokens', (req, res) => {
+app.get('/api/test/gettokens', getAccessToken, (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Credentials', true);
 	res.send({tokens_get: tokens.get(), tokensreq: req.accesstoken});
