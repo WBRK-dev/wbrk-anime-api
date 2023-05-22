@@ -1,6 +1,3 @@
-const crypto = require("crypto");
-const tokens = require("../vars");
-
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
 	res.setHeader('Access-Control-Allow-Credentials', true);
@@ -19,7 +16,7 @@ module.exports = async (req, res) => {
 	if (json.access_token !== null && json.access_token !== undefined) {
 		let sessionid = crypto.randomUUID();
 
-		tokens.push({
+		req.tokens.push({
 			sessionid: sessionid,
 			access: json.access_token,
 			refresh: json.refresh_token

@@ -13,12 +13,16 @@ global.CODE_VERIFIER = CODE_VERIFIER;
 function getTokens(req, res, next) {
 	let sessionid = req.cookies.sessionid;
 	req.accesstoken = tokens.find(sessionid).accesstoken;
-	req.sessionid = sessionid;
 	console.log(req.accesstoken);
 	next();
 }
 
-app.get('/api/authorize', getTokens, require("./auth/authorize"));
+function asignTokenObj(req, res, next) {
+	req.tokens = tokens;
+	next();
+}
+
+app.get('/api/authorize', asignTokenObj, require("./auth/authorize"));
 app.get('/api/list/get', getTokens, require("./list/get"));
 app.get('/api/user/info', getTokens, require("./user/info"));
 
