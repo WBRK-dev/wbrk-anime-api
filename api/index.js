@@ -1,5 +1,4 @@
 const app = require('express')();
-const crypto = require("crypto");
 const cookieParser = require("cookie-parser");
 const tokens = require("./vars");
 
