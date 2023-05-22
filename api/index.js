@@ -8,6 +8,7 @@ let MAL_ACCESSTOKEN_URL = "https://myanimelist.net/v1/oauth2/token";
 let CODE_VERIFIER = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
 global.MAL_ACCESSTOKEN_URL = MAL_ACCESSTOKEN_URL;
 global.CODE_VERIFIER = CODE_VERIFIER;
+global.tokens = tokens;
 
 function getTokens(req, res, next) {
 	let sessionid = req.cookies.sessionid;
@@ -21,7 +22,7 @@ function asignTokenObj(req, res, next) {
 	next();
 }
 
-app.get('/api/authorize', asignTokenObj, require("./auth/authorize"));
+app.get('/api/authorize', require("./auth/authorize"));
 app.get('/api/list/get', getTokens, require("./list/get"));
 app.get('/api/user/info', getTokens, require("./user/info"));
 
