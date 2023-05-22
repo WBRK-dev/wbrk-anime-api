@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
 
 	let tempTokens = tokens.get();
 
-	for (let i = 0; i < tokens.length; i++) {if (tokens[i].sessionid === sessionid) {accesstoken = tokens[i].access;break;}}
+	for (let i = 0; i < tempTokens.length; i++) {if (tempTokens[i].sessionid === sessionid) {accesstoken = tempTokens[i].access;break;}}
 
 	let response = await fetch("https://api.myanimelist.net/v2/users/@me?fields=anime_statistics", {
 		headers: {
