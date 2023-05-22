@@ -7,6 +7,8 @@ app.use(cookieParser());
 
 let MAL_ACCESSTOKEN_URL = "https://myanimelist.net/v1/oauth2/token";
 let CODE_VERIFIER = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
+global.MAL_ACCESSTOKEN_URL = MAL_ACCESSTOKEN_URL;
+global.CODE_VERIFIER = CODE_VERIFIER;
 
 function getTokens(req, res, next) {
 	let sessionid = req.cookies.sessionid;
