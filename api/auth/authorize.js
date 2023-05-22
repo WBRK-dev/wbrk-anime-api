@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
 	if (json.access_token !== null && json.access_token !== undefined) {
 		let sessionid = crypto.randomUUID();
 
-		global.tokens.push({
+		tokens.push({
 			sessionid: sessionid,
 			access: json.access_token,
 			refresh: json.refresh_token
@@ -28,6 +28,6 @@ module.exports = async (req, res) => {
 
 		return res.send({"succesfull": true});
 	} else {
-		return res.send({"succesfull": false, failedFetch: json});
+		return res.send({"succesfull": false, response: json});
 	}
 }
