@@ -73,7 +73,7 @@ app.get('/api/user/info', async (req, res) => {
 		}
 	});
 	
-	res.send({res: await response.json()});
+	res.send({res: await response.json(), accesstoken: accesstoken, tokens: tokens.get()});
 });
 
 
