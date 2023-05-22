@@ -1,76 +1,23 @@
 const app = require('express')();
-const crypto = require("crypto");
 const cookieParser = require("cookie-parser");
 const tokens = require("./vars");
 
 app.use(cookieParser());
+app.use((req, res, next) => {req.tokens = require("./vars");next();})
 
 let MAL_ACCESSTOKEN_URL = "https://myanimelist.net/v1/oauth2/token";
 let CODE_VERIFIER = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
+global.MAL_ACCESSTOKEN_URL = MAL_ACCESSTOKEN_URL;
+global.CODE_VERIFIER = CODE_VERIFIER;
 
-// Authorize
-app.get('/api/authorize', async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
-	res.setHeader('Access-Control-Allow-Credentials', true);
-	
-    let code = req.query.code;
-	let ip =  req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+function getAccessToken(req, res, next) {
+	req.accesstoken = tokens.find(req.cookies.sessionid).accesstoken;
+	next();
+}
 
-	console.log(`AUTH - ${ip}`);
-
-	let url = MAL_ACCESSTOKEN_URL;
-	let body = `client_id=${process.env.client_id}&client_secret=${process.env.client_secret}&grant_type=authorization_code&code_verifier=${CODE_VERIFIER}&code=${code}`;
-
-	let response = await fetch(url, {headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',},method: 'POST',body,});
-	let json = await response.json();
-
-	if (json.access_token !== null && json.access_token !== undefined) {
-		let sessionid = crypto.randomUUID();
-
-		tokens.push({
-			sessionid: sessionid,
-			access: json.access_token,
-			refresh: json.refresh_token
-		});
-
-		res.cookie("sessionid", sessionid, {httpOnly: true, secure: true, sameSite: "none"});
-
-		return res.send({"succesfull": true});
-	} else {
-		return res.send({"succesfull": false, response: json});
-	}
-});
-
-// User anime list
-app.get('/api/list/get', async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
-	res.setHeader('Access-Control-Allow-Credentials', true);
-	let accesstoken = tokens.find(req.cookies.sessionid);
-
-	let response = await fetch("https://api.myanimelist.net/v2/users/@me/animelist?fields=list_status&limit=16&sort=list_updated_at&status=watching", {
-		headers: {
-			"Authorization": `Bearer ${accesstoken}`
-		}
-	});
-
-
-	res.send(await response.json());
-});
-
-// User
-app.get('/api/user/info', async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
-	res.setHeader('Access-Control-Allow-Credentials', true);
-	let accesstoken = tokens.find(req.cookies.sessionid).accesstoken;
-	let response = await fetch("https://api.myanimelist.net/v2/users/@me?fields=anime_statistics", {
-		headers: {
-			"Authorization": `Bearer ${accesstoken}`
-		}
-	});
-	
-	res.send(await response.json());
-});
-
+app.get('/api/authorize', require("./auth/authorize"));
+app.get('/api/list/get', getAccessToken, require("./list/get"));
+app.get('/api/user/info', getAccessToken, require("./user/info"));
 
 
 
@@ -96,7 +43,7 @@ app.get('/api/test', async (req, res) => {
 app.get('/api/test/gettokens', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Credentials', true);
-	res.send({tokens_get: tokens.get(), accesstoken: tokens.find(req.cookies.sessionid)});
+	res.send({tokens_get: tokens.get(), tokensreq: req.accesstoken});
 });
 // END - Debug tests
 
