@@ -101,7 +101,7 @@ app.get('/api/test', async (req, res) => {
 app.get('/api/test/gettokens', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Credentials', true);
-	res.send({tokens_get: tokens.get(), tokensreq: req.accesstoken});
+	res.send({tokens_get: tokens.get(), accesstoken: tokens.find(req.cookies.sessionid)});
 });
 // END - Debug tests
 
