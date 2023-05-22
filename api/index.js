@@ -65,7 +65,7 @@ app.get('/api/list/get', async (req, res) => {
 app.get('/api/user/info', async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
 	res.setHeader('Access-Control-Allow-Credentials', true);
-	let accesstoken = req.tokens.find(req.cookies.sessionid);
+	let accesstoken = tokens.find(req.cookies.sessionid);
 	console.log(accesstoken);
 	let response = await fetch("https://api.myanimelist.net/v2/users/@me?fields=anime_statistics", {
 		headers: {
