@@ -12,7 +12,6 @@ module.exports = {
     },
     find: function(sessionid) {
         let data = {accesstoken: "", refreshtoken: ""}
-        console.log("searching for", sessionid, "available sessionids", [...tokens.map(t => t.sessionid)]);
         for (let i = 0; i < tokens.length; i++) {if (tokens[i].sessionid === sessionid) {data.accesstoken = tokens[i].access;data.refreshtoken = tokens[i].refresh;break;}}
         return data;
     }
