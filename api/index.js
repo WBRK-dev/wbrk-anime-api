@@ -32,7 +32,7 @@ app.get('/api/test/list/get', async (req, res) => {
 })
 
 app.get('/api/test', async (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', 'wbrk-anime.pages.dev');
+	res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
 	res.send({success: true});
 })
 
