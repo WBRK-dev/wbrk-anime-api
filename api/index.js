@@ -28,7 +28,7 @@ app.get('/api/authorize', async (req, res) => {
 	if (json.access_token !== null && json.access_token !== undefined) {
 		let sessionid = crypto.randomUUID();
 
-		req.tokens.push({
+		tokens.push({
 			sessionid: sessionid,
 			access: json.access_token,
 			refresh: json.refresh_token
@@ -49,7 +49,7 @@ app.get('/api/list/get', async (req, res) => {
 
 	let response = await fetch("https://api.myanimelist.net/v2/users/@me/animelist?fields=list_status&limit=16&sort=list_updated_at&status=watching", {
 		headers: {
-			"Authorization": `Bearer ${req.accesstoken}`
+			"Authorization": `Bearer ${tokens.find(req.cookies.sessionid)}`
 		}
 	});
 
@@ -65,11 +65,11 @@ app.get('/api/user/info', async (req, res) => {
 	
 	let response = await fetch("https://api.myanimelist.net/v2/users/@me?fields=anime_statistics", {
 		headers: {
-			"Authorization": `Bearer ${req.accesstoken}`
+			"Authorization": `Bearer ${tokens.find(req.cookies.sessionid)}`
 		}
 	});
 	
-	res.send({res: await response.json(), accesstoken:req.accesstoken, sessionid: req.cookies.sessionid});
+	res.send(await response.json());
 });
 
 
@@ -93,7 +93,7 @@ app.get('/api/test', async (req, res) => {
 	res.send({success: true});
 })
 
-app.get('/api/test/gettokens', getAccessToken, (req, res) => {
+app.get('/api/test/gettokens', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Credentials', true);
 	res.send({tokens_get: tokens.get(), tokensreq: tokens.find(req.cookies.sessionid)});
