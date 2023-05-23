@@ -24,8 +24,8 @@ module.exports = async (req, res) => {
 			refresh: json.refresh_token
 		});
 
-		res.cookie("sessionid", sessionid, {httpOnly: true, secure: true, sameSite: "none"});
-
+		res.cookie("sessionid", sessionid, {httpOnly: true, secure: true, sameSite: "none", maxAge: 1000*60*60*24*30});
+		
 		return res.send({"succesfull": true});
 	} else {
 		return res.send({"succesfull": false, response: json});
