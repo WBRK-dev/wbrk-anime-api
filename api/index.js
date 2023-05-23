@@ -49,7 +49,7 @@ app.get('/api/list/get', async (req, res) => {
 
 	let response = await fetch("https://api.myanimelist.net/v2/users/@me/animelist?fields=list_status&limit=16&sort=list_updated_at&status=watching", {
 		headers: {
-			"Authorization": `Bearer ${tokens.find(req.cookies.sessionid)}`
+			"Authorization": `Bearer ${tokens.find(req.cookies.sessionid).accesstoken}`
 		}
 	});
 
@@ -65,7 +65,7 @@ app.get('/api/user/info', async (req, res) => {
 	
 	let response = await fetch("https://api.myanimelist.net/v2/users/@me?fields=anime_statistics", {
 		headers: {
-			"Authorization": `Bearer ${tokens.find(req.cookies.sessionid)}`
+			"Authorization": `Bearer ${tokens.find(req.cookies.sessionid).accesstoken}`
 		}
 	});
 	
@@ -96,7 +96,7 @@ app.get('/api/test', async (req, res) => {
 app.get('/api/test/gettokens', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Credentials', true);
-	res.send({tokens_get: tokens.get(), tokensreq: tokens.find(req.cookies.sessionid)});
+	res.send({tokens_get: tokens.get(), tokensreq: tokens.find(req.cookies.sessionid).accesstoken});
 });
 // END - Debug tests
 
