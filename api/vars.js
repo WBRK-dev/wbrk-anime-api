@@ -1,18 +1,19 @@
+let tokens = [];
+
 module.exports = {
-    tokens: [],
     set: function(value) {
-        this.tokens = value;
+        tokens = value;
     },
     get: function() {
-        return this.tokens;
+        return tokens;
     },
     push: function(value) {
-        this.tokens.push(value);
+        tokens.push(value);
     },
     find: function(sessionid) {
       let data = {accesstoken: "", refreshtoken: ""}
-      console.log("searching for", sessionid, "available sessionids", [...this.tokens.map(t => t.sessionid)]);
-      for (let i = 0; i < this.tokens.length; i++) {if (this.tokens[i].sessionid === sessionid) {data.accesstoken = this.tokens[i].access;data.refreshtoken = this.tokens[i].refresh;break;}}
+      console.log("searching for", sessionid, "available sessionids", [...tokens.map(t => t.sessionid)]);
+      for (let i = 0; i < tokens.length; i++) {if (tokens[i].sessionid === sessionid) {data.accesstoken = tokens[i].access;data.refreshtoken = tokens[i].refresh;break;}}
       return data;
     }
 }
