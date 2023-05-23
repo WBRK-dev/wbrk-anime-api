@@ -1,3 +1,5 @@
+const tokens = require("../vars");
+
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
 	res.setHeader('Access-Control-Allow-Credentials', true);
@@ -8,5 +10,5 @@ module.exports = async (req, res) => {
 		}
 	});
 	
-	res.send({res: await response.json(), accesstoken:req.accesstoken, sessionid: req.cookies.sessionid, tokens: req.tokens.get()});
+	res.send({res: await response.json(), accesstoken:req.accesstoken, sessionid: req.cookies.sessionid, tokens: tokens.get()});
 }
