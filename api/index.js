@@ -1,5 +1,6 @@
 const app = require('express')();
 const cookieParser = require("cookie-parser");
+require('dotenv').config()
 
 app.use(cookieParser());
 app.use(require('./assignTokensObj'));
@@ -39,13 +40,17 @@ app.get('/api/test', async (req, res) => {
 app.get('/api/test/gettokens', getAccessToken, (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Credentials', true);
-	res.send({tokens_get: req.tokens.get(), tokensreq: req.accesstoken});
+	if (req.query.admin === process.env.admin_token) {
+		res.send({tokens_get: req.tokens.get(), tokensreq: req.accesstoken});
+	} else {
+		res.send("You are not permitted to access the tokens.");
+	}
 });
 // END - Debug tests
 
-// app.listen(8088, () =>
-//     console.log(`Anime API listening on port 8088!`),
-// );
+app.listen(8088, () =>
+    console.log(`Anime API listening on port 8088!`),
+);
 
 app.all((req, res) => res.writeHead(404).end('unknown'))
 module.exports = app;
