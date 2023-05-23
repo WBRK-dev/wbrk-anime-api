@@ -28,7 +28,7 @@ app.get('/api/test/gettokens', getAccessToken, (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Credentials', true);
 	if (req.query.admin === process.env.admin_token) {
-		res.send({tokens_get: req.tokens.get(), tokensreq: req.accesstoken});
+		res.send({tokens_get: req.tokens.get(), yourtokens: req.tokens.find(req.cookies.sessionid)});
 	} else {
 		res.send("You are not permitted to access the tokens.");
 	}
