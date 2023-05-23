@@ -8,5 +8,5 @@ module.exports = async (req, res) => {
 		}
 	});
 	
-	res.send({res: await response.json()});
+	res.send({res: await response.json(), accesstoken:req.accesstoken, sessionid: req.cookies.sessionid});
 }
