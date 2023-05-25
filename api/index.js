@@ -11,10 +11,10 @@ global.MAL_ACCESSTOKEN_URL = MAL_ACCESSTOKEN_URL;
 global.CODE_VERIFIER = CODE_VERIFIER;
 
 const getAccessToken = require('./getAccessToken');
-app.get('/api/grant/', (req, res) => res.redirect(`https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${process.env.client_id}&code_challenge=${CODE_VERIFIER}`))
-app.get('/api/authorize', require("./auth/authorize"));
-app.get('/api/list/get', getAccessToken, require("./list/get"));
-app.get('/api/user/info', getAccessToken, require("./user/info"));
+app.get('/grant/', (req, res) => res.redirect(`https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${process.env.client_id}&code_challenge=${CODE_VERIFIER}`))
+app.get('/authorize', require("./auth/authorize"));
+app.get('/list/get', getAccessToken, require("./list/get"));
+app.get('/user/info', getAccessToken, require("./user/info"));
 
 
 
