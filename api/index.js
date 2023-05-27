@@ -19,12 +19,12 @@ app.get('/user/info', getAccessToken, require("./user/info"));
 
 
 // Debug tests
-app.get('/api/test', async (req, res) => {
+app.get('/test', async (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
 	res.send({success: true});
 })
 
-app.get('/api/test/gettokens', getAccessToken, (req, res) => {
+app.get('/test/gettokens', getAccessToken, (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Credentials', true);
 	if (req.query.admin === process.env.admin_token) {
