@@ -22,7 +22,7 @@ app.get('/user/info', getAccessToken, require("./user/info"));
 
 // Debug tests
 app.get('/test', async (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', 'https://*.wbrk-anime.pages.dev');
+	res.setHeader('Access-Control-Allow-Origin', 'https://development.wbrk-anime.pages.dev');
 	res.send({success: true});
 })
 

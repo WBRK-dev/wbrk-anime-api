@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 
 module.exports = async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://*.wbrk-anime.pages.dev');
+    res.setHeader('Access-Control-Allow-Origin', 'https://development.wbrk-anime.pages.dev');
 	res.setHeader('Access-Control-Allow-Credentials', true);
 	
     let code = req.query.code;
