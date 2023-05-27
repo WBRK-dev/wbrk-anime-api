@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 
 module.exports = async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://wbrk-anime.pages.dev');
+    res.setHeader('Access-Control-Allow-Origin', 'https://*.wbrk-anime.pages.dev');
 	res.setHeader('Access-Control-Allow-Credentials', true);
 	
     let code = req.query.code;
@@ -17,6 +17,23 @@ module.exports = async (req, res) => {
 
 	if (json.access_token !== null && json.access_token !== undefined) {
 		let sessionid = crypto.randomUUID();
+
+		// let my_file = JSON.parse(await s3.getObject({
+		// 	Bucket: "cyclic-fair-red-agouti-robe-eu-central-1",
+		// 	Key: "tokens.json",
+		// }).promise());
+
+		// my_file.tokens.push({
+		// 	sessionid: sessionid,
+		// 	access: json.access_token,
+		// 	refresh: json.refresh_token
+		// });
+
+		// await s3.putObject({
+		// 	Body: JSON.stringify(my_file),
+		// 	Bucket: "cyclic-fair-red-agouti-robe-eu-central-1",
+		// 	Key: "tokens.json",
+		// }).promise()
 
 		req.tokens.push({
 			sessionid: sessionid,
